@@ -9,7 +9,7 @@ class PostController extends Controller
 {
     function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth')->except('index');
     }
 
     /**
