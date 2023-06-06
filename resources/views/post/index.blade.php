@@ -1,14 +1,29 @@
 @extends('layouts.app')
 @section('content')
- 
 
-    @if (session('msg'))
+@if (session('msg'))
     <div class="alert alert-success">
         {{ session('msg') }}
-    </div> 
-    @endif
+    </div>
+@endif
 
-  
+<div class="container">
+    <div class="row">
+        @foreach ($posts as $post)
+        <div class="card">
+            <div class="card-header">
+                {{ $post->title }}
+                <div>{{ $post->user->name }}</div>
+                <div>{{ $post->created_at->diffForHumans() }}</div>
+            </div>
+            <div class="card-body">
+                <p class="card-text">{{ $post->content }}</p>
+                <a href="#" class="btn btn-primary">Show The Post</a>
+            </div>
+        </div>
+        @endforeach
+    </div>
+    <div>{{$posts->links()}}</div>
+</div>
 
-    <h1>Hallo Selamat Datang {{ $user != null ? $user->name: "" }}</h1>
 @endsection

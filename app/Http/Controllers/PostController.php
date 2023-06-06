@@ -17,18 +17,22 @@ class PostController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
-        $user = Auth::user();
-        return view('post.index', compact('user'));
-    }
+{
+    $posts = Post::orderBy('id', 'desc')->paginate(4);
+    return view('post.index', compact('posts'));
+}
+
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
+       
         return view('post.create');
     }
+
+    
 
     /**
      * Store a newly created resource in storage.
