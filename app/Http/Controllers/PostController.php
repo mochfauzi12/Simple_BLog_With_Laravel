@@ -41,10 +41,10 @@ class PostController extends Controller
     {
        $request->validate([
             'title' => ['required','min:3', 'max:30'],
-            'content' => ['required','min:3', 'max:200']
+            'content' => ['required','min:3']
        ]);
 
-       //try {
+       try {
        Post::create([
             'title' => $request->input('title'),
             'content' => $request->input('content'),
@@ -55,9 +55,9 @@ class PostController extends Controller
        return redirect()->route('post.index')->with('msg', 'Your post was successfully created');
 
 
-        // } catch(\Exception $e) {
-        //     return redirect()->back()->with('msg','post not added');
-        // }
+        } catch(\Exception $e) {
+            return redirect()->back()->with('msg','post not added');
+        }
     }
 
     /**
@@ -65,7 +65,8 @@ class PostController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $post = Post::find($id);
+        return view('post.show', compact('post'));
     }
 
     /**

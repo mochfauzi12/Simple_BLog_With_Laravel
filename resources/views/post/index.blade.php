@@ -1,4 +1,7 @@
+
+
 @extends('layouts.app')
+
 @section('content')
 
 @if (session('msg'))
@@ -6,6 +9,8 @@
         {{ session('msg') }}
     </div>
 @endif
+<div class="container">
+<a href="{{ route('post.create') }}" class="btn btn-danger text-center m-3">Add New Post</a>
 
 <div class="container">
     <div class="row">
@@ -17,8 +22,8 @@
                 <div>{{ $post->created_at->diffForHumans() }}</div>
             </div>
             <div class="card-body">
-                <p class="card-text">{{ $post->content }}</p>
-                <a href="#" class="btn btn-primary">Show The Post</a>
+                <p class="card-text">{{ substr($post->content, 0, 220) }}</p>
+                <a href="{{ route('post.show', $post->id) }}" class="btn btn-primary">Show The Post</a>
             </div>
         </div>
         @endforeach
@@ -27,3 +32,4 @@
 </div>
 
 @endsection
+
