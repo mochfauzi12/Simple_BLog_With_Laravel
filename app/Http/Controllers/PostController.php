@@ -10,12 +10,18 @@ class PostController extends Controller
 {
     function __construct()
     {
-        $this->middleware('auth')->except('index');
+        $this->middleware('auth')->except('index','show');
     }
 
     /**
      * Display a listing of the resource.
      */
+
+    public function dashboard(){
+        $authUser = Auth::user();
+        $myPosts = $authUser->posts;
+        return view('post.dashboard', compact('myPosts'));
+    } 
     public function index()
 {
     $posts = Post::orderBy('id', 'desc')->paginate(4);

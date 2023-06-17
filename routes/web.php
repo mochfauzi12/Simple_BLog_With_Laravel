@@ -23,3 +23,4 @@ Auth::routes();
 
 
 Route::resource('/post',PostController::class);
+Route::get('/dashboard',[PostController::class, 'dashboard'])->name('dashboard');
