@@ -21,7 +21,7 @@
       <th scope="row">{{ $post->id }}</th>
       <td>{{ $post->title }}</td>
       <th scope="row">
-        <a href="" class="btn btn-success">Edit</a>
+        <a href="{{ route('post.edit' , $post->id) }}" class="btn btn-success">Edit</a>
       </th>
       <td>
         <a href="" class="btn btn-danger">Delete</a>

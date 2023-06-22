@@ -80,7 +80,8 @@ class PostController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $post = Post::find($id);
+        return view('post.edit', compact('post'));
     }
 
     /**
@@ -88,7 +89,26 @@ class PostController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'title' => ['required','min:3', 'max:30'],
+            'content' => ['required','min:3']
+       ]);
+
+       try {
+        $myPost = Post::find($id);
+       $myPost->update([
+            'title' => $request->input('title'),
+            'content' => $request->input('content'),
+            'user_id' => Auth::id(),
+       ]);
+
+       //return redirect()->route('route.index')->with('msg', 'Your post was successfully created');
+       return redirect()->route('post.index')->with('msg', 'Your Updated was successfully created');
+
+
+        } catch(\Exception $e) {
+            return redirect()->back()->with('msg','post not updated');
+        }
     }
 
     /**
