@@ -1,7 +1,11 @@
 @extends('layouts.app')
 @section('content')
 
-
+@if (session('msg'))
+    <div class="alert alert-success">
+        {{ session('msg') }}
+    </div>
+@endif
   
 
 <table class="table">
@@ -24,7 +28,11 @@
         <a href="{{ route('post.edit' , $post->id) }}" class="btn btn-success">Edit</a>
       </th>
       <td>
-        <a href="" class="btn btn-danger">Delete</a>
+        <form action="{{route ('post.destroy',$post) }}" method="POST">
+          @csrf
+          @method('DELETE')
+          <button type="submit" class="btn btn-danger" onClick=" return  confirm ('Are you Sure') "> Delete </button>
+        </form>  
       </td>
       
       

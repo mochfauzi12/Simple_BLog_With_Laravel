@@ -102,7 +102,7 @@ class PostController extends Controller
             'user_id' => Auth::id(),
        ]);
 
-       //return redirect()->route('route.index')->with('msg', 'Your post was successfully created');
+       //return redirect()->route('route.index')->w  ith('msg', 'Your post was successfully created');
        return redirect()->route('post.index')->with('msg', 'Your Updated was successfully created');
 
 
@@ -114,8 +114,21 @@ class PostController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Post $post)
     {
-        //
+        try {
+            $owner = $post->user->id;
+            $authUser = Auth::id();
+
+            if($owner == $authUser) {
+                $post->delete();
+                return redirect()->back()->with('msg', 'Your post was deleted successfully');
+            } else{
+                return redirect()->back()->with('msg', 'It is not your post to be deleted');
+            }
+        
+        } catch(\Exception $e) {
+            return redirect()->back()->with('msg','post not deleted');
     }
+ }
 }
