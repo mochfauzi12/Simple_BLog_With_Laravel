@@ -19,7 +19,7 @@ class PostController extends Controller
 
     public function dashboard(){
         $authUser = Auth::user();
-        $myPosts = $authUser->posts;
+        $myPosts = $authUser->posts()->paginate(3);
         return view('post.dashboard', compact('myPosts'));
     } 
     public function index()

@@ -40,6 +40,7 @@
     @endforeach
   </tbody>
 </table>
+<div>{{ $myPosts->links()}}</div>
 
 
 @endsection

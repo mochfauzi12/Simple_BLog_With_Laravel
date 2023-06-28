@@ -15,6 +15,9 @@
 
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                   <h5> <a class="nav-link" href="{{ route('post.index') }}"> Posts </a></h5>
+                </li> 
                 <!-- Authentication Links -->
                 @guest
                     @if (Route::has('login'))
@@ -31,7 +34,7 @@
                 @else
 
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('dashboard') }}"> Dashboard </a>
+                    <h5><a class="nav-link" href="{{ route('dashboard') }}"> Dashboard </a></h5>
                 </li>        
 
                     <li class="nav-item dropdown">
